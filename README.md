@@ -39,8 +39,11 @@ https://aistudio.baidu.com/aistudio/datasetdetail/97273
 - 硬件：GPU、CPU
 
 - 框架：
+  
   aistudio 默认 2.1 版本
+  
   Name: paddlepaddle-gpu
+  
   Version: 2.1.2.post101
 
 ## 五、快速开始
