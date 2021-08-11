@@ -6,12 +6,18 @@
 
 ## 一、内容简介
 
-本项目基于paddlepaddle框架复现YOLACT，YOLACT是一种新的实例分割网络，由于没有使用两阶段方法中的pooling操作使得可以获得无损失的特征信息，并且在大目标的分割场景下性能表现更优秀；
+本项目基于paddlepaddle框架复现YOLACT，YOLACT是一种新的实例分割网络，由于没有使用两阶段方法中的pooling操作使得可以获得无损失的特征信息，并且在大目标的分割场景下性能表现更优秀
+
 论文地址：
+
 https://arxiv.org/pdf/1904.02689.pdf
+
 参考项目：
+
 https://github.com/dbolya/yolact
+
 https://github.com/PaddlePaddle/PaddleDetection
+
 https://github.com/PaddlePaddle/PaddleSeg
 
 ## 二、复现精度
@@ -23,7 +29,9 @@ https://github.com/PaddlePaddle/PaddleSeg
 | 700        | Resnet101-FPN | 6 | 31.2 |
 
 ## 三、数据集
+
 COCO2017-完整数据集:
+
 https://aistudio.baidu.com/aistudio/datasetdetail/97273
 
 ## 四、环境依赖
