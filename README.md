@@ -45,6 +45,8 @@ https://aistudio.baidu.com/aistudio/datasetdetail/12716/0
 
 ## 四、环境依赖
 
+> pip install -r requirments.txt
+
 - 硬件：GPU、CPU
 
 - 框架：
@@ -124,15 +126,15 @@ coco2017_testdev_dataset = dataset_base.copy({
 ```
 ├─data                            # 数据加载和配置
    |--config.py                   # 配置文件
-├─layers                         # 中间处理过程和 loss
+├─layers                          # 中间处理过程和 loss
    |--modules
       |--multibox_loss.py         # 训练的 loss
 ├─logs                            # 训练日志
-├─utils                          # 工具包（计时、日志记录、数据增强）
-│--backbone.py                   # backbone(resnet 实现)
-│--eval.py                        # 评估
-│--yolact.py                     # model 实现
-│--README.md                   # 中文readme
+├─utils                           # 工具包（计时、日志记录、数据增强）
+│--backbone.py                    # backbone(resnet 实现)
+│--eval.py                        # 预测和评估
+│--yolact.py                      # model 实现
+│--README.md                      # 中文readme
 │--requirement.txt                # 依赖
 │--train.py                       # 训练
 ```
