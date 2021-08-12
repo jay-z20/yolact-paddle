@@ -139,8 +139,11 @@ coco2017_testdev_dataset = dataset_base.copy({
 
 ### 6.2 评估流程
 > python eval.py --trained_model yolact_im700_54_800000.pdparams --output_coco_json  --dataset=coco2017_testdev_dataset --cuda=True
+> 
 > cd results
+> 
 > cp mask_detections.json detections_test-dev2017_yolact_results.json
+> 
 > zip detections_test-dev2017_yolact_results.zip detections_test-dev2017_yolact_results.json
 
 在 `coco` 官网提交结果
