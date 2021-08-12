@@ -56,12 +56,53 @@ https://aistudio.baidu.com/aistudio/datasetdetail/12716/0
   Version: 2.1.2.post101
 
 ## 五、快速开始
-**训练**
-> python train.py --config=yolact_base_config --batch_size=2 --trained_model=yolact_base_54_800000.pdparams
 
 **预测**
 > python eval.py --trained_model yolact_base_54_800000.pdparams --output_coco_json  --dataset=coco2017_testdev_dataset --cuda=True
 `result` 文件夹中 `mask_detections.json` 生成结果
 
+**训练**
+> python train.py --config=yolact_base_config --batch_size=2 --trained_model=yolact_base_54_800000.pdparams
+
+**训练 `log`**
 ![image](https://user-images.githubusercontent.com/25956447/129172494-84c6fdb7-16ba-4009-bbaf-ff52be294e0c.png)
 
+
+## 六、代码结构与详细说明
+
+### 6.1 代码结构
+
+```
+├─data                            # 数据加载和配置
+   |--config.py                   # 配置文件
+├─layers                         # 中间处理过程和 loss
+   |--modules
+      |--multibox_loss.py         # 训练的 loss
+├─logs                            # 训练日志
+├─utils                          # 工具包（计时、日志记录、数据增强）
+│--backbone.py                   # backbone(resnet 实现)
+│--eval.py                        # 评估
+│--yolact.py                     # model 实现
+│--README.md                   # 中文readme
+│--requirement.txt                # 依赖
+│--train.py                       # 训练
+```
+
+### 6.2 评估流程
+> python eval.py --trained_model yolact_im700_54_800000.pdparams --output_coco_json  --dataset=coco2017_testdev_dataset --cuda=True
+
+在 `coco` 官网提交结果
+```
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.312
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.506
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.328
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.121
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.332
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.471
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.290
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.423
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.433
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.227
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.470
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.608
+```
