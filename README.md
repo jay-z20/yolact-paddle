@@ -23,10 +23,10 @@ https://github.com/PaddlePaddle/PaddleSeg
 ## 二、复现精度
 **COCO test-dev2017**
 
-| Image Size | Backbone      | FPS  | mAP  |
-|:----------:|:-------------:|:----:|:----:|
-| 550        | Resnet101-FPN | 6 | 29.8 |
-| 700        | Resnet101-FPN | 6 | 31.2 |
+| Image Size | Backbone      | FPS  | mAP  |download|
+|:----------:|:-------------:|:----:|:----:|:---:|
+| 550        | Resnet101-FPN | 6 | 29.8 |[百度网盘](https://pan.baidu.com/s/15H0BwHsfFnkjaxD9neiFdA) 提取码: 3g73 |
+| 700        | Resnet101-FPN | 6 | 31.2 |[百度网盘](https://pan.baidu.com/s/1fkTqmOXbZOi-TKwJJRwNJg) 提取码: vsv4 |
 
 ## 三、数据集
 
