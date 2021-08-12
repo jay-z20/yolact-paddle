@@ -57,6 +57,26 @@ https://aistudio.baidu.com/aistudio/datasetdetail/12716/0
 
 ## 五、快速开始
 
+**修改训练数据配置文件**
+
+修改配置文件 `data/config.py`
+
+```
+'train_images': '/home/aistudio/train2017/', # 修改为训练数据文件夹
+
+'train_info': '/home/aistudio/annotations/instances_train2017.json',  # 修改为 train 据标注
+'valid_info': '/home/aistudio/annotations/instances_val2017.json',     # 修改为 val 数据标注
+
+coco2017_testdev_dataset = dataset_base.copy({
+    'name': 'COCO 2017 Test-Dev',
+    'valid_images': '/home/aistudio/test2017/',                                  # coco test-dev2017 测试数据集文件夹
+    'valid_info': '/home/aistudio/annotations/image_info_test-dev2017.json',     # image_info_test-dev2017.json 文件
+    'has_gt': False,
+
+    'label_map': COCO_LABEL_MAP
+})
+```
+
 **预测**
 > python eval.py --trained_model yolact_base_54_800000.pdparams --output_coco_json  --dataset=coco2017_testdev_dataset --cuda=True
 `result` 文件夹中 `mask_detections.json` 生成结果
