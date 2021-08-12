@@ -35,7 +35,7 @@ COCO2017-完整数据集:
 https://aistudio.baidu.com/aistudio/datasetdetail/97273
 
 
-image_info_test2017.zip：
+image_info_test2017.zip (image_info_test-dev2017.json):
 
 https://cocodataset.org/#download
 
