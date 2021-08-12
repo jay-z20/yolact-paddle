@@ -65,6 +65,8 @@ https://aistudio.baidu.com/aistudio/datasetdetail/12716/0
 > python train.py --config=yolact_base_config --batch_size=2 --trained_model=yolact_base_54_800000.pdparams
 
 **训练 `log`**
+`B: Localization Loss   C: Confidence loss  M: Mask loss  S:Semantic segmentation loss`
+
 ![image](https://user-images.githubusercontent.com/25956447/129172494-84c6fdb7-16ba-4009-bbaf-ff52be294e0c.png)
 
 
