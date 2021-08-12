@@ -34,6 +34,14 @@ COCO2017-完整数据集:
 
 https://aistudio.baidu.com/aistudio/datasetdetail/97273
 
+
+image_info_test2017.zip：
+https://cocodataset.org/#download
+
+test2017 (6339.04M):
+
+https://aistudio.baidu.com/aistudio/datasetdetail/12716/0
+
 ## 四、环境依赖
 
 - 硬件：GPU、CPU
