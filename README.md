@@ -63,5 +63,5 @@ https://aistudio.baidu.com/aistudio/datasetdetail/12716/0
 > python eval.py --trained_model yolact_base_54_800000.pdparams --output_coco_json  --dataset=coco2017_testdev_dataset --cuda=True
 `result` 文件夹中 `mask_detections.json` 生成结果
 
-![image](https://user-images.githubusercontent.com/25956447/129172324-fe8ea7e9-2674-42be-b64c-f530d547e9ca.png)
+![image](https://user-images.githubusercontent.com/25956447/129172494-84c6fdb7-16ba-4009-bbaf-ff52be294e0c.png)
 
