@@ -62,10 +62,37 @@ https://aistudio.baidu.com/aistudio/datasetdetail/12716/0
 修改配置文件 `data/config.py`
 
 ```
-'train_images': '/home/aistudio/train2017/', # 修改为训练数据文件夹
+dataset_base = Config({
+    'name': 'Base Dataset',
 
-'train_info': '/home/aistudio/annotations/instances_train2017.json',  # 修改为 train 据标注
-'valid_info': '/home/aistudio/annotations/instances_val2017.json',     # 修改为 val 数据标注
+    # Training images and annotations
+    'train_images': '/home/aistudio/train2017/', # 修改为训练数据文件夹
+    'train_info':   'path_to_annotation_file',
+
+    # Validation images and annotations.
+    'valid_images': '/home/aistudio/val2017/',    # 修改为验证数据文件夹
+    'valid_info':   'path_to_annotation_file',
+
+    # Whether or not to load GT. If this is False, eval.py quantitative evaluation won't work.
+    'has_gt': True,
+
+    # A list of names for each of you classes.
+    'class_names': COCO_CLASSES,
+
+    # COCO class ids aren't sequential, so this is a bandage fix. If your ids aren't sequential,
+    # provide a map from category_id -> index in class_names + 1 (the +1 is there because it's 1-indexed).
+    # If not specified, this just assumes category ids start at 1 and increase sequentially.
+    'label_map': None
+})
+
+coco2017_dataset = dataset_base.copy({
+    'name': 'COCO 2017',
+    
+    'train_info': '/home/aistudio/annotations/instances_train2017.json', # 修改为 train 据标注
+    'valid_info': '/home/aistudio/annotations/instances_val2017.json',   # 修改为 val 数据标注
+
+    'label_map': COCO_LABEL_MAP
+})
 
 coco2017_testdev_dataset = dataset_base.copy({
     'name': 'COCO 2017 Test-Dev',
