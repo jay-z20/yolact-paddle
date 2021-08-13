@@ -160,7 +160,7 @@ def prep_display(dets_out, img, h, w, undo_transform=True, class_color=False, ma
         #t[3].index_select(idx,0)
         if cfg.eval_mask_branch:
             # Masks are drawn on the GPU, so don't copy
-            masks = paddle.gather(paddle.cast(t[3],"int"),index=idx,axis=0)
+            masks = paddle.gather(paddle.cast(t[3],"float32"),index=idx,axis=0)
             #masks = t[3][idx]  ## ??
         classes, scores, boxes = [paddle.gather(x,idx,0).cpu().numpy() for x in t[:3]]
         # classes, scores, boxes = [x[idx].cpu().numpy() for x in t[:3]]
