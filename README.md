@@ -99,7 +99,9 @@ coco2017_testdev_dataset = dataset_base.copy({
 
 **预测**
 > 下载 yolact_resnet50_54_800000.dpparams 并保存到 eval.py 相同目录下
+
 > python eval.py --trained_model yolact_resnet50_54_800000.dpparams --output_coco_json  --dataset=coco2017_testdev_dataset --cuda=True
+
 > `result` 文件夹中 `mask_detections.json` 生成结果
 
 **训练**
