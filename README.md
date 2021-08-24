@@ -24,7 +24,7 @@ https://github.com/PaddlePaddle/PaddleSeg
 **COCO test-dev2017**
 
 | Image Size | Backbone      | mAP  |download|
-|:----------:|:-------------:|:----:|:----:|:---:|
+|:----------:|:-------------:|:----:|:---:|
 | 550        | Resnet50-FPN | 28.9 |[百度网盘](https://pan.baidu.com/s/1q469EtxLqCb-F_LRIpLqkA) 提取码: ghnx |
 
 ## 三、数据集
@@ -103,11 +103,6 @@ coco2017_testdev_dataset = dataset_base.copy({
 
 **训练**
 > python train.py --config=yolact_resnet50_config --batch_size=8
-
-**训练 `log`**
-`B: Localization Loss   C: Confidence loss  M: Mask loss  S:Semantic segmentation loss`
-
-![image](https://user-images.githubusercontent.com/25956447/129172494-84c6fdb7-16ba-4009-bbaf-ff52be294e0c.png)
 
 
 ## 六、代码结构与详细说明
