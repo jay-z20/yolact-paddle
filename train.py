@@ -410,7 +410,7 @@ def train():
     print()
     # try-except so you can use ctrl+c to save early and stop training
     try:
-        for epoch in range(4,num_epochs):
+        for epoch in range(num_epochs):
             # Resume from start_iter
             if (epoch+1)*epoch_size < iteration:
                 continue
