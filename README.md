@@ -25,7 +25,7 @@ https://github.com/PaddlePaddle/PaddleSeg
 
 | Image Size | Backbone      | mAP  |download|
 |:----------:|:-------------:|:----:|:---:|
-| 550        | Resnet50-FPN | 28.9 |[百度网盘](https://pan.baidu.com/s/1q469EtxLqCb-F_LRIpLqkA) 提取码: ghnx |
+| 550        | Resnet50-FPN | 28.9 |[百度网盘](https://pan.baidu.com/s/1vRyiI__ewKWrI0rdIXkYCg) 提取码: 6jjs |
 
 ## 三、数据集
 
