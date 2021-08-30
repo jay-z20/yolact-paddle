@@ -63,7 +63,7 @@ parser.add_argument('--config', default=None,
                     help='The config object to use.')
 parser.add_argument('--save_interval', default=10000, type=int,
                     help='The number of iterations between saving the model.')
-parser.add_argument('--validation_size', default=5000, type=int,
+parser.add_argument('--validation_size', default=350000, type=int,
                     help='The number of images to use for validation.')
 parser.add_argument('--validation_epoch', default=2, type=int,
                     help='Output validation information every n iterations. If -1, do no validation.')
@@ -507,6 +507,8 @@ def train():
                     yolact_net.save_weights(save_path(epoch, iteration))
                     paddle.save(optimizer.state_dict(),
                             os.path.join("./weights/", 'model_%d.pdopt'%iteration))
+                    if iteration >= args.validation_epoch:  # when iter  >= 350000 valid test
+						compute_validation_map(epoch, iteration, yolact_net, val_dataset, log if args.log else None)
                     if args.keep_latest and latest is not None:
                         if args.keep_latest_interval <= 0 or iteration % args.keep_latest_interval != args.save_interval:
                             print('Deleting old save...')
