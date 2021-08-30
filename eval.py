@@ -394,16 +394,27 @@ def prep_metrics(ap_data, dets, img, gt, gt_masks, h, w, num_crowd, image_id, de
     if not args.output_coco_json:
         with timer.env('Prepare gt'):
             gt_boxes = paddle.to_tensor(gt[:, :4])
-            gt_boxes[:, [0, 2]] *= w
-            gt_boxes[:, [1, 3]] *= h
+            #print("gt_boxes",gt_boxes.shape)
+            x1 = paddle.slice(gt_boxes, axes=[1], starts=[0], ends=[1]) * w #;print("x1",x1.shape)
+            x2 = paddle.slice(gt_boxes, axes=[1], starts=[2], ends=[3]) * w
+            y1 = paddle.slice(gt_boxes, axes=[1], starts=[1], ends=[2]) * h
+            y2 = paddle.slice(gt_boxes, axes=[1], starts=[3], ends=[4]) * h
+            gt_boxes = paddle.concat([x1, y1, x2, y2],1)
+            #print("gt_boxes",gt_boxes.shape)
+            # gt_boxes[:, [0, 2]] *= w
+            # gt_boxes[:, [1, 3]] *= h
             gt_classes = list(gt[:, 4].astype("int"))
             gt_masks = paddle.to_tensor(gt_masks).reshape((-1, h*w))
 
             if num_crowd > 0:
-                split = lambda x: (x[-num_crowd:], x[:-num_crowd])
-                crowd_boxes  , gt_boxes   = split(gt_boxes)
-                crowd_masks  , gt_masks   = split(gt_masks)
-                crowd_classes, gt_classes = split(gt_classes)
+                nc = num_crowd.item()
+                split = lambda x: (x[-num_crowd:,:], x[:-num_crowd,:])
+                #print(type(num_crowd),num_crowd)
+                #print("gt_boxes",gt_boxes.shape,"gt_masks",gt_masks.shape,"gt_classes",len(gt_classes),gt_classes[0].shape)
+                gt_masks = gt_masks.astype("float32")
+                crowd_boxes  , gt_boxes   =  gt_boxes[-nc:,:], gt_boxes[:-nc,:]    #split(gt_boxes)
+                crowd_masks  , gt_masks   = gt_masks[-nc:,:], gt_masks[:-nc,:]     #split(gt_masks)
+                crowd_classes, gt_classes = gt_classes[-nc:], gt_classes[:-nc]  #split(gt_classes)
 
     with timer.env('Postprocess'):
         classes, scores, boxes, masks = postprocess(dets, w, h, crop_masks=args.crop, score_threshold=args.score_threshold)
@@ -440,12 +451,12 @@ def prep_metrics(ap_data, dets, img, gt, gt_masks, h, w, num_crowd, image_id, de
         num_pred = len(classes)
         num_gt   = len(gt_classes)
 
-        mask_iou_cache = _mask_iou(masks, gt_masks)
-        bbox_iou_cache = _bbox_iou(boxes.float(), gt_boxes.float())
+        mask_iou_cache = _mask_iou(masks.astype("float32"), gt_masks.astype("float32"))
+        bbox_iou_cache = _bbox_iou(boxes.astype("float32"), gt_boxes.astype("float32"))
 
         if num_crowd > 0:
-            crowd_mask_iou_cache = _mask_iou(masks, crowd_masks, iscrowd=True)
-            crowd_bbox_iou_cache = _bbox_iou(boxes.float(), crowd_boxes.float(), iscrowd=True)
+            crowd_mask_iou_cache = _mask_iou(masks.astype("float32"), crowd_masks.astype("float32"), iscrowd=True)
+            crowd_bbox_iou_cache = _bbox_iou(boxes.astype("float32"), crowd_boxes.astype("float32"), iscrowd=True)
         else:
             crowd_mask_iou_cache = None
             crowd_bbox_iou_cache = None
