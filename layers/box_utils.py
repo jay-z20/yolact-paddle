@@ -101,16 +101,15 @@ def mask_iou(masks_a, masks_b, iscrowd=False):
     """
     Computes the pariwise mask IoU between two sets of masks of size [a, h, w] and [b, h, w].
     The output is of size [a, b].
-
     Wait I thought this was "box_utils", why am I putting this in here?
     """
 
-    masks_a = masks_a.reshape(masks_a.shape[0], -1)
-    masks_b = masks_b.reshape(masks_b.shape[0], -1)
+    masks_a = masks_a.reshape((masks_a.shape[0], -1)) 
+    masks_b = masks_b.reshape((masks_b.shape[0], -1)) 
 
-    intersection = paddle.mm(masks_a, masks_b.t())
-    area_a = masks_a.sum(dim=1).unsqueeze(1)
-    area_b = masks_b.sum(dim=1).unsqueeze(0)
+    intersection = paddle.mm(masks_a, paddle.transpose(masks_b, [1, 0])) 
+    area_a = masks_a.sum(axis=1).unsqueeze(1)
+    area_b = masks_b.sum(axis=1).unsqueeze(0)
 
     return intersection / (area_a + area_b - intersection) if not iscrowd else intersection / area_a
 
@@ -135,7 +134,6 @@ def change(gt, priors):
     https://lmb.informatik.uni-freiburg.de/Publications/2018/UB18/paper-box2pix.pdf
     
     Input should be in point form (xmin, ymin, xmax, ymax).
-
     Output is of shape [num_gt, num_priors]
     Note this returns -change so it can be a drop in replacement for 
     """
@@ -281,7 +279,6 @@ def decode(loc, priors, use_yolo_regressors:bool=False):
     """
     Decode predicted bbox coordinates using the same scheme
     employed by Yolov2: https://arxiv.org/pdf/1612.08242.pdf
-
         b_x = (sigmoid(pred_x) - .5) / conv_w + prior_x
         b_y = (sigmoid(pred_y) - .5) / conv_h + prior_y
         b_w = prior_w * exp(loc_w)
@@ -341,7 +338,6 @@ def sanitize_coordinates(_x1, _x2, img_size:int, padding:int=0, cast:bool=True):
     """
     Sanitizes the input coordinates so that x1 < x2, x1 != x2, x1 >= 0, and x2 <= image_size.
     Also converts from relative to absolute coordinates and casts the results to long tensors.
-
     If cast is false, the result won't be cast to longs.
     Warning: this does things in-place behind the scenes so copy if necessary.
     """
@@ -363,7 +359,6 @@ def crop(masks, boxes, padding:int=1):
     """
     "Crop" predicted masks by zeroing out everything not in the predicted bbox.
     Vectorized by Chong (thanks Chong).
-
     Args:
         - masks should be a size [h, w, n] tensor of masks
         - boxes should be a size [n, 4] tensor of bbox coords in relative point form
@@ -391,7 +386,6 @@ def crop(masks, boxes, padding:int=1):
 def index2d(src, idx):
     """
     Indexes a tensor by a 2d index.
-
     In effect, this does
         out[i, j] = src[i, idx[i, j]]
     
